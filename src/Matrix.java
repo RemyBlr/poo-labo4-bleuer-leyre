@@ -9,52 +9,88 @@ public class Matrix {
     // Constructor with parameter
 
     // Display matrix
+    public void display() {
+        for (int[] row : elements) {
+            for (int e : row) {
+                System.out.print(e + " ");
+            }
+            System.out.println();
+        }
+    }
 
     // Operate given operation on two matrices
     public Matrix operate(Matrix other, Operation operation) {
-        // Je m'occuperai de cette méthode -Rémy
+        checkModulo(other);
+        checkSize(other);
+        int[][] res = new int[this.rows][this.cols];
 
-        // check modulo
-        // check max row
-        // check max column
-        // int[][] res = new int[][];
-
-        /*
-        for() { // rows
-            for() { // columns
-                int a = 0;
-                int b = 0;
+        // loop over double array
+        for(int i = 0; i < this.rows; ++i) { // rows
+            for(int j = 0; j < this.cols; ++j) { // columns
+                // get elements
+                int a = this.elements[i][j];
+                int b = other.elements[i][j];
+                // do operation
                 res[i][j] = operation.doOperation(a, b, this.n);
             }
         }
         return new Matrix(res, this.n);
-        */
-        return null;
     }
 
     // Add two matrices
     public Matrix add(Matrix other) {
-        // maybe check dimensions here
         return operate(other, new Addition());
     }
 
     // Subtract two matrices
     public Matrix subtract(Matrix other) {
-        // maybe check dimensions here
         return operate(other, new Subtraction());
     }
 
     // Multiply two matrices
     public Matrix multiply(Matrix other) {
-        // maybe check dimensions here
         return operate(other, new Multiplication());
     }
 
     // Check modulo
+    private void checkModulo(Matrix other) {
+        if (this.n != other.n) {
+            throw new RuntimeException("Les modulos n des deux matrices ne correspondent pas");
+        }
+    }
 
     // Check size
+    private void checkSize(Matrix other) {
+        // max rows and columns
+        int maxRows = Math.max(this.rows, other.rows);
+        int maxCols = Math.max(this.cols, other.cols);
+        // resize this matrix if needed
+        if(this.rows != maxRows || this.cols != maxCols) {
+            this.resize(maxRows, maxCols);
+        }
+        // resize other matrix if needed
+        if(other.rows != maxRows || other.cols != maxCols) {
+            other.resize(maxRows, maxCols);
+        }
+    }
 
     // Resize matrix
-
-
+    public void resize(int newRows, int newCols) {
+        int[][] newElem = new int[newRows][newCols];
+        // loop over double array
+        for(int i = 0; i < newRows; ++i) {
+            for(int j = 0; j < newCols; ++j) {
+                // place existing numbers in same spots
+                if(i < this.rows && j < this.cols)
+                    newElem[i][j] = this.elements[i][j];
+                // resize with 0
+                else
+                    newElem[i][j] = 0;
+            }
+        }
+        // set new values
+        this.rows = newRows;
+        this.cols = newCols;
+        this.elements = newElem;
+    }
 }
