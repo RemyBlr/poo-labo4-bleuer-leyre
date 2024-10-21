@@ -5,8 +5,25 @@ public class Matrix {
     private int[][] elements;
 
     // Constructor with random numbers
+    Matrix(int rows, int cols, int n) {
+        this.rows = rows;
+        this.cols = cols;
+        this.n = n;
+        elements = new int[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                elements[i][j] = (int)(Math.random() * (n));
+            }
+        }
+    }
 
     // Constructor with parameter
+    Matrix(int[][] elements, int n) {
+        this.rows = elements.length;
+        this.cols = elements[0].length;
+        this.n = n;
+        this.elements = elements;
+    }
 
     // Display matrix
     public void display() {
