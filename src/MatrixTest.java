@@ -159,7 +159,7 @@ class MatrixTest {
     void TestExeption() {
         Matrix alien = new Matrix(elementsM4,16);
         RuntimeException thrown = assertThrows(RuntimeException.class,() -> alien.add(m1),
-                "Sizes does not match");
-        assertTrue(thrown.getMessage().contains("Stuff"));
+                "Les modulos n des deux matrices ne correspondent pas");
+        assertTrue(thrown.getMessage().contains("Les modulos n des deux matrices ne correspondent pas"));
     }
 }
