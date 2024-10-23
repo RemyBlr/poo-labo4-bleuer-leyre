@@ -25,6 +25,11 @@ public class Matrix {
         this.elements = elements;
     }
 
+    //Elements getter
+    public int[][] getElements() {
+        return elements;
+    }
+
     // Display matrix
     public void display() {
         for (int[] row : elements) {
