@@ -43,15 +43,18 @@ public class Matrix {
     // Operate given operation on two matrices
     public Matrix operate(Matrix other, Operation operation) {
         checkModulo(other);
-        checkSize(other);
-        int[][] res = new int[this.rows][this.cols];
+        Matrix[] matrices = checkSize(other);
+        Matrix matrixThis = matrices[0];
+        Matrix matrixOther = matrices[1];
+
+        int[][] res = new int[matrixThis.rows][matrixThis.cols];
 
         // loop over double array
-        for(int i = 0; i < this.rows; ++i) { // rows
-            for(int j = 0; j < this.cols; ++j) { // columns
+        for(int i = 0; i < matrixThis.rows; ++i) { // rows
+            for(int j = 0; j < matrixThis.cols; ++j) { // columns
                 // get elements
-                int a = this.elements[i][j];
-                int b = other.elements[i][j];
+                int a = matrixThis.elements[i][j];
+                int b = matrixOther.elements[i][j];
                 // do operation
                 res[i][j] = operation.doOperation(a, b, this.n);
             }
@@ -82,37 +85,33 @@ public class Matrix {
     }
 
     // Check size
-    private void checkSize(Matrix other) {
+    private Matrix[] checkSize(Matrix other) {
         // max rows and columns
         int maxRows = Math.max(this.rows, other.rows);
         int maxCols = Math.max(this.cols, other.cols);
         // resize this matrix if needed
-        if(this.rows != maxRows || this.cols != maxCols) {
-            this.resize(maxRows, maxCols);
-        }
+        Matrix resizedThis = (this.rows != maxRows || this.cols != maxCols) ? resizedCopy(this, maxRows, maxCols) : this;
         // resize other matrix if needed
-        if(other.rows != maxRows || other.cols != maxCols) {
-            other.resize(maxRows, maxCols);
-        }
+        Matrix resizedOther = (other.rows != maxRows || other.cols != maxCols) ? resizedCopy(other, maxRows, maxCols) : other;
+
+        return new Matrix[]{resizedThis, resizedOther};
     }
 
     // Resize matrix
-    public void resize(int newRows, int newCols) {
+    public Matrix resizedCopy(Matrix m, int newRows, int newCols) {
         int[][] newElem = new int[newRows][newCols];
         // loop over double array
         for(int i = 0; i < newRows; ++i) {
             for(int j = 0; j < newCols; ++j) {
                 // place existing numbers in same spots
-                if(i < this.rows && j < this.cols)
-                    newElem[i][j] = this.elements[i][j];
+                if(i < m.rows && j < m.cols)
+                    newElem[i][j] = m.elements[i][j];
                 // resize with 0
                 else
                     newElem[i][j] = 0;
             }
         }
-        // set new values
-        this.rows = newRows;
-        this.cols = newCols;
-        this.elements = newElem;
+        // return copy
+        return new Matrix(newElem, m.n);
     }
 }

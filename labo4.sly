@@ -49,7 +49,7 @@
       <method isAbstract="false" isStatic="false" name="add" returnType="Matrix" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="m" type="Matrix"/>
       </method>
-      <method isAbstract="false" isStatic="false" name="sub" returnType="Matrix" view="DEFAULT" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="subtract" returnType="Matrix" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="m" type="Matrix"/>
       </method>
       <method isAbstract="false" isStatic="false" name="multiply" returnType="Matrix" view="DEFAULT" visibility="PUBLIC">
@@ -58,10 +58,11 @@
       <method isAbstract="false" isStatic="false" name="checkModulo" returnType="void" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="m" type="Matrix"/>
       </method>
-      <method isAbstract="false" isStatic="false" name="checkSize" returnType="void" view="DEFAULT" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="checkSize" returnType="Matrix[]" view="DEFAULT" visibility="PUBLIC">
         <variable const="false" name="m" type="Matrix"/>
       </method>
-      <method isAbstract="false" isStatic="false" name="resize" returnType="Matrix" view="DEFAULT" visibility="PUBLIC">
+      <method isAbstract="false" isStatic="false" name="resizedCopy" returnType="Matrix" view="DEFAULT" visibility="PUBLIC">
+        <variable const="false" name="m" type="Matrix"/>
         <variable const="false" name="row" type="int"/>
         <variable const="false" name="col" type="int"/>
       </method>

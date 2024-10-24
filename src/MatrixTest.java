@@ -50,8 +50,6 @@ class MatrixTest {
         int[][] elementsM3add3 = {
                 {0,2,4,6},
                 {8,0,2,4},
-                {0,0,0,0},
-                {0,0,0,0}
         };
 
         // result Matrix
@@ -135,7 +133,7 @@ class MatrixTest {
         };
         int[][] elementsM3multi3 = {
                 {0,1,4,9},
-                {6,5,6,9}
+                {6,5,6,9},
         };
 
         // result Matrix
