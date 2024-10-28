@@ -6,6 +6,12 @@ public class Matrix {
 
     // Constructor with random numbers
     Matrix(int rows, int cols, int n) {
+        if (rows < 0 || cols < 0 || n <= 0) {
+            throw new RuntimeException("Invalid matrix arguments");
+        }
+        if ((rows == 0 && cols > 0) || (cols == 0 && rows > 0)) {
+            throw new RuntimeException("Invalid matrix arguments");
+        }
         this.rows = rows;
         this.cols = cols;
         this.n = n;
@@ -19,6 +25,9 @@ public class Matrix {
 
     // Constructor with parameter
     Matrix(int[][] elements, int n) {
+        if (n <= 0 || !ERangeCheck(elements, n)) {
+            throw new RuntimeException("Invalid matrix arguments");
+        }
         this.rows = elements.length;
         this.cols = elements[0].length;
         this.n = n;
@@ -30,14 +39,17 @@ public class Matrix {
         return elements;
     }
 
-    // Display matrix
-    public void display() {
-        for (int[] row : elements) {
-            for (int e : row) {
-                System.out.print(e + " ");
+    //Elements range check
+    public boolean ERangeCheck(int[][] elements,int n){
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                int e = elements[i][j];
+                if (e >= n || e < 0){
+                    return false;
+                }
             }
-            System.out.println();
         }
+        return true;
     }
 
     // Operate given operation on two matrices
@@ -60,21 +72,6 @@ public class Matrix {
             }
         }
         return new Matrix(res, this.n);
-    }
-
-    // Add two matrices
-    public Matrix add(Matrix other) {
-        return operate(other, new Addition());
-    }
-
-    // Subtract two matrices
-    public Matrix subtract(Matrix other) {
-        return operate(other, new Subtraction());
-    }
-
-    // Multiply two matrices
-    public Matrix multiply(Matrix other) {
-        return operate(other, new Multiplication());
     }
 
     // Check modulo
@@ -113,5 +110,42 @@ public class Matrix {
         }
         // return copy
         return new Matrix(newElem, m.n);
+    }
+
+    // Add two matrices
+    public Matrix add(Matrix other) {
+        return operate(other, new Addition());
+    }
+
+    // Subtract two matrices
+    public Matrix subtract(Matrix other) {
+        return operate(other, new Subtraction());
+    }
+
+    // Multiply two matrices
+    public Matrix multiply(Matrix other) {
+        return operate(other, new Multiplication());
+    }
+
+    @Override
+    // Display matrix
+    public String toString() {
+        String m = "";
+        if (this.rows <= 1)
+            m += "[";
+        if (this.cols == 0)
+            m += "[]";
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < elements[i].length; j++) {
+                m += elements[i][j];
+                if (j < elements[i].length - 1)
+                    m += " ";
+            }
+            if (i < rows - 1)
+                m += "\n";
+        }
+        if (this.rows <= 1)
+            m += "]";
+        return m;
     }
 }

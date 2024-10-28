@@ -1,41 +1,44 @@
 public class Main {
     public static void main(String[] args) {
-        // modulo
-        int n = 10;
+        if (args.length != 5) {
+            throw new RuntimeException("Invalid Format: [N1] [M1] [N2] [M2] [n]");
+        }
+
+        // args
+        int N1 = Integer.parseInt(args[0]);
+        int M1 = Integer.parseInt(args[1]);
+        int N2 = Integer.parseInt(args[2]);
+        int M2 = Integer.parseInt(args[3]);
+        int n = Integer.parseInt(args[4]);
 
         // matrix 1
-        Matrix matrix1 = new Matrix(4,3,n);
-        // matrix 2
-        int[][] elementsM2 = {
-                {0,1,2,3},
-                {4,5,6,7},
-                {9,8,2,1},
-                {4,3,5,6}
-                };
-        Matrix matrix2 = new Matrix(elementsM2,n);
+        Matrix matrix1 = new Matrix(N1,M1,n);
 
-        System.out.println("The modulus is " + n);
+        // matrix 2
+        Matrix matrix2 = new Matrix(N2,M2,n);
+
+        System.out.println("The modulus is " + n  + "\n");
 
         // Show intial matrices
         System.out.println("one");
-        matrix1.display();
+        System.out.println(matrix1.toString() + "\n");
 
         System.out.println("two");
-        matrix2.display();
+        System.out.println(matrix2.toString() + "\n");
 
         // Add
         Matrix add = matrix1.add(matrix2);
         System.out.println("one + two");
-        add.display();
+        System.out.println(add.toString() + "\n");
 
         // Subtract
         Matrix subtract = matrix1.subtract(matrix2);
         System.out.println("one - two");
-        subtract.display();
+        System.out.println(subtract.toString() + "\n");
 
         // Multiply
         Matrix multiply = matrix1.multiply(matrix2);
         System.out.println("one x two");
-        multiply.display();
+        System.out.println(multiply.toString() + "\n");
     }
 }
