@@ -1,3 +1,8 @@
+/*
+* Authors : Bleuer Rémy, Leyre Arnaut
+* Date : 30.10.2024
+* Classe : POO-A
+*/
 public class Main {
     public static void main(String[] args) {
         if (args.length != 5) {
